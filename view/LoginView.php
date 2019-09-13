@@ -22,16 +22,12 @@ class LoginView {
 	public function response() {
     $message = '';
 
-    if (strlen(self::$name) == 0) {
-      $message = 'Username is missing';
+    if(isset($_SESSION['username'])) {
+      $response .= $this->generateLogoutButtonHTML($message);
+    } else {
+      $response = $this->generateLoginFormHTML($message);
     }
-
-    if (strlen(self::$password) == 0) {
-      $message = 'Password is missing';
-    }
-		
-		$response = $this->generateLoginFormHTML($message);
-		//$response .= $this->generateLogoutButtonHTML($message);
+    
 		return $response;
 	}
 
@@ -75,7 +71,16 @@ class LoginView {
 			</form>
 		';
 	}
-	
+  
+  
+  public function login() {
+    if(isset($_POST[self::$name]) || isset($_POST[self::$password])) {
+      
+    } else {
+      echo "Username is missing";
+    }
+  }
+
 	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
 	private function getRequestUserName() {
     //RETURN REQUEST VARIABLE: USERNAME
