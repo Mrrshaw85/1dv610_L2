@@ -20,7 +20,7 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-    $message = '';
+    //$message = '';
 
     if(isset($_SESSION['username'])) {
       $response .= $this->generateLogoutButtonHTML($this->message);
