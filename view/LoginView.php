@@ -22,7 +22,9 @@ class LoginView {
 	public function response() {
     $message = '';
     
-    if (strlen($name) == 0) {
+    string $uname = getRequestUserName();
+
+    if (strlen($uname) == 0) {
       $message = 'Username is missing';
     }
 
@@ -78,7 +80,8 @@ class LoginView {
 	
 	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
 	private function getRequestUserName() {
-		//RETURN REQUEST VARIABLE: USERNAME
+    //RETURN REQUEST VARIABLE: USERNAME
+    return self::$name;
   }
   
 
