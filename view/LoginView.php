@@ -9,7 +9,7 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
-
+  private $message = "";
 	
 
 	/**
@@ -23,9 +23,9 @@ class LoginView {
     $message = '';
 
     if(isset($_SESSION['username'])) {
-      $response .= $this->generateLogoutButtonHTML($message);
+      $response .= $this->generateLogoutButtonHTML($this->message);
     } else {
-      $response = $this->generateLoginFormHTML($message);
+      $response = $this->generateLoginFormHTML($this->message);
     }
     
 		return $response;
@@ -77,7 +77,7 @@ class LoginView {
     if(isset($_POST[self::$name]) || isset($_POST[self::$password])) {
       
     } else {
-      generateLoginFormHTML("Username is missing");
+      $this->message = "Username is missing";
     }
   }
 
