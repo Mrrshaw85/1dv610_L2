@@ -22,8 +22,12 @@ class LoginView {
 	public function response() {
     $message = '';
     
-    if (!isset($_POST['name'])) {
+    if (strlen($name) == 0) {
       $message = 'Username is missing';
+    }
+
+    if (strlen($password) == 0) {
+      $message = 'Password is missing';
     }
 		
 		$response = $this->generateLoginFormHTML($message);
