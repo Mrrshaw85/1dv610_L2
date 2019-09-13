@@ -78,6 +78,8 @@ class LoginView {
       
       if($_POST[self::$name] == '') {
         $this->message = "Username is missing";
+      } elseif ($_POST[self::$password] == '') {
+        $this->message = "Password is missing";
       }
     }
   }
