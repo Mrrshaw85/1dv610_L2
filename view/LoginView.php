@@ -21,14 +21,12 @@ class LoginView {
 	 */
 	public function response() {
     $message = '';
-    
-    string $uname = getRequestUserName();
 
-    if (strlen($uname) == 0) {
+    if (strlen(self::$name) == 0) {
       $message = 'Username is missing';
     }
 
-    if (strlen($password) == 0) {
+    if (strlen(self::$password) == 0) {
       $message = 'Password is missing';
     }
 		
