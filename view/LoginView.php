@@ -76,8 +76,9 @@ class LoginView {
   public function login() {
     if(isset($_POST[self::$name]) || isset($_POST[self::$password])) {
       
-    } else {
-      $this->message = "Username is missing";
+      if($_POST[self::$name] == '') {
+        $this->message = "Username is missing";
+      }
     }
   }
 
