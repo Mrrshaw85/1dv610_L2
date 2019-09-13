@@ -77,7 +77,7 @@ class LoginView {
     if(isset($_POST[self::$name]) || isset($_POST[self::$password])) {
       
     } else {
-      echo "Username is missing";
+      generateLoginFormHTML("Username is missing");
     }
   }
 
