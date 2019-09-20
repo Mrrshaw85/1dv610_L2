@@ -31,6 +31,7 @@ class LoginView {
       }
       else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
         $_SESSION['username'] = $_POST[self::$name];
+        $_SESSION['loggedin'] = true;
         $message = "Welcome";
       }
         else if($_POST[self::$name] == 'Admin' || $_POST[self::$password] == 'Password')
