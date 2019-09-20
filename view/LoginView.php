@@ -28,7 +28,7 @@ class LoginView {
       if(empty($_POST[self::$name]) && ($_POST[self::$password])) {
         $message = "Username is missing";
       }
-      else if(empty($_POST[self::$password]) && $_POST[self::$name] !== 'Admin' && !empty($_POST[self::$name]) {
+      else if(empty($_POST[self::$password]) && $_POST[self::$name] !== 'Admin' && !empty($_POST[self::$name])) {
         $message = "Password is missing"; // TODO: Fix so its set even if Admin is username
       }
         else 
