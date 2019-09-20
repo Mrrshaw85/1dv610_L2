@@ -9,8 +9,7 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
   private static $messageId = 'LoginView::Message';
-  private $holdUsername = "";
-
+  private $holdUsername = '';
 	/**
 	 * Create HTTP response
 	 *
@@ -22,6 +21,8 @@ class LoginView {
     $message = '';
 
     if(isset($_POST[self::$login])) {
+      $this->holdUsername = $_POST[self::$name];
+      
       if(empty($_POST[self::$name])) {
          $message = "Username is missing";
       }
@@ -29,12 +30,10 @@ class LoginView {
         $message = "Password is missing";
       }
       else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
-        $this->holdUsername = 'Admin';
-        $_SESSION['username'] = 'Admin';
+        $_SESSION['username'] = $_POST[self::$name];
       }
         else if($_POST[self::$name] == 'Admin' || $_POST[self::$password] == 'Password')
       { 
-          $this->holdUsername = 'Admin';
           $message = "Wrong name or password";
       } 
     }
