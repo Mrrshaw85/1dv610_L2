@@ -22,6 +22,9 @@ class LoginView {
     $message = '';
 
     if(isset($_POST[self::$login])) {
+      if(empty($_POST[self::$name] && (empty($_POST[self::$password]))) {
+         $message = "Username is missing";
+      }
       if(empty($_POST[self::$name]) && ($_POST[self::$password])) {
         $message = "Username is missing";
       }
@@ -30,7 +33,7 @@ class LoginView {
       }
         else 
       {
-        if($_POST[self::$name] == 'Admin') {
+        if($_POST[self::$name] == 'Admin' && $_POST[self::$password] !== 'Password') {
           $this->holdUsername = 'Admin';
           $message = "Password is missing";
         }
