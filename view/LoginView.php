@@ -44,8 +44,9 @@ class LoginView {
         $response = $this->generateLoginFormHTML($message);
       }
       
-      return $response;
+      
       }
+      return $response;
     }
     
 
