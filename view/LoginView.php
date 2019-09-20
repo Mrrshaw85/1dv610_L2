@@ -22,21 +22,16 @@ class LoginView {
     $message = '';
 
     if(empty($_POST[self::$name]) && empty($_POST[self::$password])) {
-
-    } 
+      $message = "Username is missing";
+    }
+    else if(empty($_POST[self::$password]) && $_POST[self::$name] == 'Admin') {
+      $message = "Password is missing";
+    }
       else 
     {
       if($_POST[self::$name] == 'Admin') {
         $this->holdUsername = 'Admin';
-        if($_POST[self::$password] == 'Password') {
-          
-        }
       }
-      if($_POST[self::$name] === '') {
-        $message = "Username is missing";
-      } elseif ($_POST[self::$password] === '') {
-        $message = "Password is missing";
-      }  
     }
 
     if(isset($_SESSION['username'])) 
