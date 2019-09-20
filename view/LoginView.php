@@ -37,11 +37,14 @@ class LoginView {
       }
         if($_POST[self::$name] == 'Admin' && $_POST[self::$password] !== 'Password') {
           $this->holdUsername = 'Admin';
-          $message = "Password is missing";
+          $message = "Wrong name or password";
+        }
+        if($_POST[self::$name] === 'Admin' && $_POST[self::$password == 'Password']) {
+          $_SESSION['username'] = 'Admin';
         }      
     }
       
-      if(isset($_SESSION['username'])) 
+      if(isset($_SESSION['username']) == 'Admin') 
       {
         $response = $this->generateLogoutButtonHTML($message); 
       } 
