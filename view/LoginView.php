@@ -26,15 +26,16 @@ class LoginView {
         $message = "Username is missing";
       }
       else if(empty($_POST[self::$password]) && $_POST[self::$name] !== 'Admin') {
-        $message = "Password is missing";
+        $message = "Password is missing"; // TODO: Fix so its set even if Admin is username
       }
         else 
       {
         if($_POST[self::$name] == 'Admin') {
           $this->holdUsername = 'Admin';
-          }
+          $message = "Password is missing";
         }
       }
+    }
       
       if(isset($_SESSION['username'])) 
       {
