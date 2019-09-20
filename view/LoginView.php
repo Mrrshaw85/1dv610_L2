@@ -21,30 +21,33 @@ class LoginView {
 	public function response() {
     $message = '';
 
-    if(empty($_POST[self::$name]) && empty($_POST[self::$password])) {
-      $message = "Username is missing";
-    }
-    else if(empty($_POST[self::$password]) && $_POST[self::$name] == 'Admin') {
-      $message = "Password is missing";
-    }
+    if(isset($_POST[self::$login])) {
+      if(empty($_POST[self::$name]) && empty($_POST[self::$password])) {
+        $message = "Username is missing";
+      }
+      else if(empty($_POST[self::$password]) && $_POST[self::$name] == 'Admin') {
+        $message = "Password is missing";
+      }
+        else 
+      {
+        if($_POST[self::$name] == 'Admin') {
+          $this->holdUsername = 'Admin';
+        }
+      }
+  
+      if(isset($_SESSION['username'])) 
+      {
+        $response = $this->generateLogoutButtonHTML($message); 
+      } 
       else 
-    {
-      if($_POST[self::$name] == 'Admin') {
-        $this->holdUsername = 'Admin';
+      {
+        $response = $this->generateLoginFormHTML($message);
+      }
+      
+      return $response;
       }
     }
-
-    if(isset($_SESSION['username'])) 
-    {
-      $response = $this->generateLogoutButtonHTML($message); 
-    } 
-    else 
-    {
-      $response = $this->generateLoginFormHTML($message);
-    }
     
-		return $response;
-	}
 
 	/**
 	* Generate HTML code on the output buffer for the logout button
