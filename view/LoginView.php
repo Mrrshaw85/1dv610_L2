@@ -8,9 +8,8 @@ class LoginView {
 	private static $cookieName = 'LoginView::CookieName';
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
-	private static $messageId = 'LoginView::Message';
-  private $message = "";
-	
+  private static $messageId = 'LoginView::Message';
+  private $holdUsername = "";
 
 	/**
 	 * Create HTTP response
@@ -20,12 +19,33 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-    //$message = '';
+    $message = '';
 
-    if(isset($_SESSION['username'])) {
-      $response .= $this->generateLogoutButtonHTML($this->message);
-    } else {
-      $response = $this->generateLoginFormHTML($this->message);
+    if(empty($_POST[self::$name]) && empty($_POST[self::$password])) {
+
+    } 
+      else 
+    {
+      if($_POST[self::$name] == 'Admin') {
+        $this->holdUsername = 'Admin';
+        if($_POST[self::$password] == 'Password') {
+          
+        }
+      }
+      if($_POST[self::$name] === '') {
+        $message = "Username is missing";
+      } elseif ($_POST[self::$password] === '') {
+        $message = "Password is missing";
+      }  
+    }
+
+    if(isset($_SESSION['username'])) 
+    {
+      $response = $this->generateLogoutButtonHTML($message); 
+    } 
+    else 
+    {
+      $response = $this->generateLoginFormHTML($message);
     }
     
 		return $response;
@@ -58,7 +78,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $this->holdUsername . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -73,21 +93,23 @@ class LoginView {
 	}
   
   
+  /*
   public function login() {
     if(isset($_POST[self::$name]) || isset($_POST[self::$password])) {
-      
-      if($_POST[self::$name] == '') {
-        $this->message = "Username is missing";
-      } elseif ($_POST[self::$password] == '') {
-        $this->message = "Password is missing";
+      if($_POST[self::$name] == "Admin") {
+        $_SESSION['username'] = 'Admin';
       }
+
     }
   }
+  */
 
 	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
 	private function getRequestUserName() {
     //RETURN REQUEST VARIABLE: USERNAME
-    return $name;
+    $savedUser = $_POST[self::$name];
+
+    return self::$holdUsername = $savedUser;
   }
   
 

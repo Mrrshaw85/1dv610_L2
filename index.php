@@ -16,7 +16,5 @@ $lv = new LayoutView();
 
 session_start();
 
-$v->login();
-
 $lv->render(false, $v, $dtv);
 
