@@ -32,9 +32,10 @@ class LoginView {
       {
         if($_POST[self::$name] == 'Admin') {
           $this->holdUsername = 'Admin';
+          }
         }
       }
-  
+      
       if(isset($_SESSION['username'])) 
       {
         $response = $this->generateLogoutButtonHTML($message); 
@@ -44,8 +45,6 @@ class LoginView {
         $response = $this->generateLoginFormHTML($message);
       }
       return $response;
-      }
-      
     }
     
 
