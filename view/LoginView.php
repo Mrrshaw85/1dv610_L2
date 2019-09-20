@@ -22,27 +22,21 @@ class LoginView {
     $message = '';
 
     if(isset($_POST[self::$login])) {
-      if(empty($_POST[self::$name]) && empty($_POST[self::$password])) {
+      if(empty($_POST[self::$name]) {
          $message = "Username is missing";
       }
-      if(empty($_POST[self::$name]) && ($_POST[self::$password])) {
-        $message = "Username is missing";
+      else if(empty($_POST[self::$password])) {
+        $message = "Password is missing";
       }
-      else if(empty($_POST[self::$password]) && $_POST[self::$name] !== 'Admin' && !empty($_POST[self::$name])) {
-        $message = "Password is missing"; // TODO: Fix so its set even if Admin is username
+      else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password')) {
+        $this->holdUsername = 'Admin';
+        $_SESSION['username'] = 'Admin';
       }
-        else 
+        else if($_POST[self::$name] == 'Admin' || $_POST[self::$password] == 'Password')
       { 
-
-      }
-        if($_POST[self::$name] == 'Admin' && $_POST[self::$password] !== 'Password') {
           $this->holdUsername = 'Admin';
           $message = "Wrong name or password";
-        }
-        if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
-          $this->holdUsername = 'Admin';
-          $_SESSION['username'] = 'Admin';
-        }      
+      } 
     }
       
       if(isset($_SESSION['username'])) 
