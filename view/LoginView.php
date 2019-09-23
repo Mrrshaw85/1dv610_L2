@@ -20,7 +20,7 @@ class LoginView {
 	 */
 	public function response() {
 
-    if($_POST[self::$logout]) {
+    if(isset($_POST[self::$logout])) {
       unset($_SESSION);
     }
       
