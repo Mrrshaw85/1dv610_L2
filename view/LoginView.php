@@ -10,6 +10,7 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
   private static $messageId = 'LoginView::Message';
   private $holdUsername = '';
+  private $message;
 	/**
 	 * Create HTTP response
 	 *
@@ -18,38 +19,48 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-    $message = '';
-
-    if(isset($_POST[self::$login])) {
-      $this->holdUsername = $_POST[self::$name];
-
-      if(empty($_POST[self::$name])) {
-         $message = "Username is missing";
-      }
-      else if(empty($_POST[self::$password])) {
-        $message = "Password is missing";
-      }
-      else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
-        $_SESSION['username'] = $_POST[self::$name];
-        $_SESSION['loggedin'] = true;
-        $message = "Welcome";
-      }
-        else if($_POST[self::$name] == 'Admin' || $_POST[self::$password] == 'Password')
-      { 
-          $message = "Wrong name or password";
-      } 
-    }
       
-      if(isset($_SESSION['username'])) 
-      {
-        $response = $this->generateLogoutButtonHTML($message); 
-      } 
-      else 
-      {
-        $response = $this->generateLoginFormHTML($message);
-      }
-      return $response;
+    if(isset($_SESSION['username'])) 
+    {
+      $response = $this->generateLogoutButtonHTML($this->message); 
+    } 
+    else 
+    {
+      $response = $this->generateLoginFormHTML($this->message);
     }
+
+    return $response;
+}
+
+public function getMessage() {
+  return $this->message;
+}
+
+
+public function isUserLoggedIn() {
+  $logged = false;
+  if(isset($_POST[self::$login])) {
+    $this->holdUsername = $_POST[self::$name];
+
+    if(empty($_POST[self::$name]) || $_POST[self::$name] == '') {
+       $this->message = "Username is missing";
+    }
+    else if(empty($_POST[self::$password])) {
+      $this->message = "Password is missing";
+    }
+    else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
+      $_SESSION['username'] = $_POST[self::$name];
+      $logged = true;
+      $this->message = "Welcome";
+    }
+      else if(!empty($_POST[self::$name]) && !empty($_POST[self::$password]))
+    { 
+      $this->message = "Wrong name or password";
+    } 
+  }
+  
+  return $logged;
+}
     
 
 	/**
@@ -92,25 +103,11 @@ class LoginView {
 			</form>
 		';
 	}
-  
-  
-  /*
-  public function login() {
-    if(isset($_POST[self::$name]) || isset($_POST[self::$password])) {
-      if($_POST[self::$name] == "Admin") {
-        $_SESSION['username'] = 'Admin';
-      }
-
-    }
-  }
-  */
 
 	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
 	private function getRequestUserName() {
     //RETURN REQUEST VARIABLE: USERNAME
-    $savedUser = $_POST[self::$name];
 
-    return self::$holdUsername = $savedUser;
   }
   
 

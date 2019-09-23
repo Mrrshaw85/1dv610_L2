@@ -15,17 +15,8 @@ $dtv = new DateTimeView();
 $lv = new LayoutView();
 
 // Creating a global variable
-$isLoggedIn;
-
 session_start();
 
-if(isset($_SESSION['loggedin'])) {
-  $isLoggedIn = true;
-} else if(isset($_GET['register'])) {
+$logged = $v->IsUserLoggedIn();
 
-} else if(!isset($_SESSION['loggedin'])); {
-  $isLoggedIn = false;
-}
-
-$lv->render($isLoggedIn, $v, $dtv);
-
+$lv->render($logged, $v, $dtv);
