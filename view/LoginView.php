@@ -43,6 +43,7 @@ public function getMessage() {
 
 public function isUserLoggedIn() {
   $logged = false;
+
   if(isset($_POST[self::$login])) {
     $this->holdUsername = $_POST[self::$name];
 
