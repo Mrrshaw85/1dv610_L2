@@ -19,6 +19,10 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
+
+    if($_POST[self::$logout]) {
+      unset($_SESSION);
+    }
       
     if(isset($_SESSION['username'])) 
     {
