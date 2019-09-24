@@ -66,7 +66,10 @@ public function isUserLoggedIn() {
     }
     else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
       $_SESSION['username'] = $_POST[self::$name];
+      $cookieName = $_POST[self::$name];
+      $cookiePassword = $_POST[self::$password];
       $logged = true;
+      setcookie($cookieName, $cookiePassword, time() + (3600 * 30), "/");
       $this->message = "Welcome";
       $_SESSION['welcome'] = true;
     }
