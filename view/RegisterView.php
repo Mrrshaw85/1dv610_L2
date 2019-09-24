@@ -23,9 +23,10 @@ class RegisterView {
       $this->pass = $_POST[self::$password];
       if($_POST[self::$register]) {
         if(strlen($_POST[self::$user]) < 3 || empty($_POST[self::$user])) {
-          $this->message = "Username has too few characters, at least 3 characters.";
-        } else if (strlen($_POST[self::$password] < 6)) {
-          $this->message = "Password has too few characters, at least 6 characters.";
+          $this->message .= "Username has too few characters, at least 3 characters.";
+        } 
+        if (strlen($_POST[self::$password] < 6)) {
+          $this->message .= "<br> Password has too few characters, at least 6 characters.";
         }
       }
     }
