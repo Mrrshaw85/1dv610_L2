@@ -18,13 +18,14 @@ $rv = new RegisterView();
 
 // Creating a global variable
 session_start();
-$registerUser = false;
+$regUser = false;
 
 if(isset($_GET['register'])) {
-  $registerUser = true;
+  $regUser = true;
+  $rv->registerUser();
 }
 
 $logged = $v->IsUserLoggedIn();
 
 
-$lv->render($logged, $v, $dtv, $rv, $registerUser);
+$lv->render($logged, $v, $dtv, $rv, $regUser);

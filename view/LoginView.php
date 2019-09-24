@@ -35,10 +35,6 @@ class LoginView {
     return $response;
 }
 
-public function registerResponse() {
-  
-}
-
 public function getMessage() {
   return $this->message;
 }
