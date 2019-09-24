@@ -19,4 +19,5 @@ session_start();
 
 $logged = $v->IsUserLoggedIn();
 
+
 $lv->render($logged, $v, $dtv);

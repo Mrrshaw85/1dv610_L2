@@ -20,14 +20,13 @@ class LoginView {
 	 */
 	public function response() {
 
-    if(isset($_POST[self::$logout])) {
-      unset($_SESSION);
-    }
       
-    if(isset($_SESSION['username'])) 
+    if(isset($_POST[self::$logout])) 
     {
+      $response = $this->generateLoginFormHTML($this->message); 
+    } else if (isset($_SESSION['username'])){
       $response = $this->generateLogoutButtonHTML($this->message); 
-    } 
+    }
     else 
     {
       $response = $this->generateLoginFormHTML($this->message);
@@ -43,6 +42,11 @@ public function getMessage() {
 
 public function isUserLoggedIn() {
   $logged = false;
+
+  if(isset($_POST[self::$logout])){
+    $this->logoutUser();
+    return $logged;
+  }
 
   if(isset($_POST[self::$login])) {
     $this->holdUsername = $_POST[self::$name];
@@ -63,10 +67,19 @@ public function isUserLoggedIn() {
       $this->message = "Wrong name or password";
     } 
   }
+
   
   return $logged;
 }
-    
+
+public function logoutUser() {
+  if(isset($_POST[self::$logout])) {
+    unset($_SESSION['username']);
+    //unset($_SESSION);
+    return false;
+  }
+  
+}
 
 	/**
 	* Generate HTML code on the output buffer for the logout button
