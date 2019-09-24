@@ -20,6 +20,10 @@ $rv = new RegisterView();
 session_start();
 $registerUser = false;
 
+if(isset($_GET['register'])) {
+  $registerUser = true;
+}
+
 $logged = $v->IsUserLoggedIn();
 
 

@@ -13,7 +13,7 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          
+          ' . $this->backToLogin() . '
           <div class="container">
               ' . $rv->registerResponse() . '
               
@@ -53,6 +53,10 @@ class LayoutView {
     else {
       return '<h2>Not logged in</h2>';
     }
+  }
+
+  private function backToLogin() {
+    return '<a href="?">Back to login</a>';
   }
 
   private function renderRegistryView() {
