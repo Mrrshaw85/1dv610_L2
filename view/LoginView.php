@@ -45,6 +45,8 @@ public function isUserLoggedIn() {
 
   if(isset($_POST[self::$logout])){
     $this->logoutUser();
+    $this->message = 'Bye bye';
+    unset($_SESSION['welcome']);
     return $logged;
   }
 
@@ -57,10 +59,16 @@ public function isUserLoggedIn() {
     else if(empty($_POST[self::$password])) {
       $this->message = "Password is missing";
     }
+    else if(isset($_SESSION['welcome'])) {
+      if($_SESSION['welcome']) {
+        $this->message = '';
+      }
+    }
     else if($_POST[self::$name] == 'Admin' && $_POST[self::$password] == 'Password') {
       $_SESSION['username'] = $_POST[self::$name];
       $logged = true;
       $this->message = "Welcome";
+      $_SESSION['welcome'] = true;
     }
       else if(!empty($_POST[self::$name]) && !empty($_POST[self::$password]))
     { 
