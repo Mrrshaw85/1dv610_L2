@@ -56,6 +56,7 @@ public function isUserLoggedIn() {
     if($_COOKIE['Admin'] == 'Password') {
       $_SESSION['username'] = 'Admin';
       $logged = true;
+      $this->message = "Welcome back with cookie";
       return $logged;
     }
   }
