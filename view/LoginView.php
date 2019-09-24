@@ -43,9 +43,9 @@ public function getMessage() {
 public function isUserLoggedIn() {
   $logged = false;
 
-  if(isset($_POST[self::$logout])){
+  if(isset($_POST[self::$logout]) && isset($_SESSION['welcome'])){
     $this->logoutUser();
-    $this->message = 'Bye bye';
+    $this->message = 'Bye bye!';
     unset($_SESSION['welcome']);
     return $logged;
   }
