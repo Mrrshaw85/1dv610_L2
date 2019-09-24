@@ -8,7 +8,7 @@ class RegisterView {
   private static $passwordRepeat = "RegisterView::PasswordRepeat";
   private static $register = "RegisterView::Register";
   private $message;
-  private $username;
+  private $username = "";
   private $pass;
 
   public function registerResponse() {
@@ -25,7 +25,7 @@ class RegisterView {
         if(strlen($_POST[self::$user]) < 3 || empty($_POST[self::$user])) {
           $this->message .= "Username has too few characters, at least 3 characters.";
         } 
-        if (strlen($_POST[self::$password] < 6)) {
+        if (strlen($_POST[self::$password]) < 6) {
           $this->message .= "<br> Password has too few characters, at least 6 characters.";
         }
       }
@@ -40,10 +40,10 @@ class RegisterView {
         <legend>Register a new user - Write username and password</legend>
         <p id="' . self::$messageId . '">' . $message . '</p>
         <label for="' . self::$user . '">Username :</label>
-        <input type="text" size="20" name="' . self::$user . '" id="' . self::$user . '" value="" />
+        <input type="text" size="20" name="' . self::$user . '" id="' . self::$user . '" value="' . $this->username . '" />
         <br>
         <label for="' . self::$password . '">Password :</label>
-        <input type="text" size="20" name="' . self::$password . '" id="' . self::$password . '" value="" />
+        <input type="text" size="20" name="' . self::$password . '" id="' . self::$password . '" value />
         <br>
         <label for="' . self::$passwordRepeat . '">Repeat password :</label>
         <input type="text" size="20" name="' . self::$passwordRepeat . '" id="' . self::$passwordRepeat . '" value="" />
