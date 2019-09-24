@@ -68,6 +68,10 @@ public function isUserLoggedIn() {
     } 
   }
 
+  if(isset($_SESSION['username'])) {
+    $logged = true;
+  }
+
   
   return $logged;
 }
