@@ -52,7 +52,7 @@ public function isUserLoggedIn() {
     return $logged;
   }
 
-  if(isset($_COOKIE['Admin'])) {
+  if(isset($_COOKIE['Admin']) && !$_SESSION['welcome']) {
     if($_COOKIE['Admin'] == 'Password') {
       $_SESSION['username'] = 'Admin';
       $logged = true;
