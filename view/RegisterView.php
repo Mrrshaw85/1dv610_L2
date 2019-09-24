@@ -31,13 +31,13 @@ class RegisterView {
     }
   }
 
-  public function regSite() {
+  public function regSite($message) {
     return '
     <h2>Register new user</h2>
     <form action="?register" method="post" enctype="multipart/form-data">
       <fieldset>
         <legend>Register a new user - Write username and password</legend>
-        <p id="' . self::$messageId . '">' . $this->message . '</p>
+        <p id="' . self::$messageId . '">' . $message . '</p>
         <label for="' . self::$user . '">Username :</label>
         <input type="text" size="20" name="' . self::$user . '" id="' . self::$user . '" value="" />
         <br>
