@@ -28,6 +28,18 @@ class RegisterView {
         if (strlen($_POST[self::$password]) < 6) {
           $this->message .= "<br> Password has too few characters, at least 6 characters.";
         }
+        if($_POST[self::$user] == "Admin") { // TODO: Check against usernames that exist in DB
+          $this->message = "User exists, pick another username.";
+        }
+        if($_POST[self::$password] != $_POST[self::$passwordRepeat]) {
+          $this->message = "Passwords do not match.";
+        }
+        if (!preg_match('/[^A-Za-z0-9]/', $this->username)) // '/[^a-z\d]/i' should also work.
+        {
+            // string contains only english letters & digits
+        } else {
+          $this->message = "Username contains invalid characters.";
+        }
       }
     }
   }
